@@ -11,7 +11,69 @@ fun main(args: Array<String>) {
     // arrays()
     // unsigned()
     // strings()
-    expressions()
+    // expressions()
+    // returnAndLabels()
+}
+
+fun returnAndLabels() {
+    nonLocalReturn()
+    localReturnExplicitly()
+    localReturnImplicitly()
+    localReturnAnonymousFunction()
+    simulatedBreak()
+    simulatedBreakReturnValue()
+}
+
+fun simulatedBreak() {
+    run loop@{
+        listOf(1, 2, 3, 4, 5).forEach {
+            if (it == 3) return@loop // non-local return from the lambda passed to run
+            print(it)
+        }
+    }
+    println(" done with nested loop")
+}
+
+fun simulatedBreakReturnValue() {
+    val x = run loop@{
+        listOf(1, 2, 3, 4, 5).forEach {
+            if (it == 3) return@loop it // non-local return from the lambda passed to run
+            print(it)
+        }
+    }
+    println(" done with nested loop $x")
+}
+
+fun localReturnAnonymousFunction() {
+    listOf(1, 2, 3, 4, 5).forEach(fun(value: Int) {
+        if (value == 3) return  // local return to the caller of the anonymous fun, i.e. the forEach loop
+        print(value)
+    })
+    println(" done with anonymous function")
+}
+
+fun nonLocalReturn() {
+    listOf(1, 2, 3, 4, 5).forEach {
+        if (it == 3) return // non-local return directly to the caller of foo()
+        print(it)
+    }
+    println("this point is unreachable")
+}
+
+fun localReturnExplicitly() {
+    listOf(1, 2, 3, 4, 5).forEach lit@{
+        if (it == 3) return@lit // local return to the caller of the lambda, i.e. the forEach loop
+        print(it)
+    }
+    println(" done with explicit label")
+}
+
+fun localReturnImplicitly() {
+    listOf(1, 2, 3, 4, 5).forEach {
+        if (it == 3) return@forEach // local return to the caller of the lambda, i.e. the forEach loop
+        print(it)
+    }
+    println(" done with implicit label")
 }
 
 fun expressions() {

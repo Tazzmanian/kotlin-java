@@ -1,5 +1,6 @@
 package org.test
 
+
 fun main(args: Array<String>) {
     println("Hello, World")
     // underscoreNumericLiterals();
@@ -9,7 +10,110 @@ fun main(args: Array<String>) {
     // characters()
     // arrays()
     // unsigned()
-    strings()
+    // strings()
+    expressions()
+}
+
+fun expressions() {
+    ifExpression()
+    whenExpression()
+    forLoops()
+    whileLoop()
+}
+
+fun whileLoop() {
+    var x = 10
+    while (x > 0) {
+        x--
+        println(x)
+    }
+
+    do {
+        println("do")
+        val y: Int? = retrieveData()
+        println("Hi $y")
+    } while (y != null) // y is visible here!
+}
+
+fun retrieveData(): Int? {
+    println("retrieveData")
+    return null;
+}
+
+fun forLoops() {
+    for (i in 1..3) {
+        println(i)
+    }
+    for (i in 6 downTo 0 step 2) {
+        println(i)
+    }
+
+    val array = intArrayOf(1, 2, 3)
+    for (i in array.indices) {
+        println(array[i])
+    }
+
+    for ((index, value) in array.withIndex()) {
+        println("the element at $index is $value")
+    }
+}
+
+fun whenExpression() {
+    val x = 1;
+    when(x) {
+        1 -> println("x == 1")
+        2 -> println("x == 2")
+        else -> {
+            println("x is neither 1 nor 2")
+        }
+    }
+
+    when (x) {
+        0, 1 -> println("x == 0 or x == 1")
+        else -> println("otherwise")
+    }
+
+    val s = "1"
+    when (x) {
+        s.toInt() -> println("s encodes x")
+        else -> println("s does not encode x")
+    }
+
+    val validNumbers = intArrayOf(1, 2, 3)
+    when (x) {
+        in 1..10 -> println("x is in the range")
+        in validNumbers -> println("x is valid")
+        !in 10..20 -> println("x is outside the range")
+        else -> println("none of the above")
+    }
+
+    println(hasPrefix("prefixes"))
+}
+
+fun hasPrefix(x: Any) = when(x) {
+    is String -> x.startsWith("prefix")
+    else -> false
+}
+
+fun ifExpression() {
+    // Traditional usage 
+    val a = 5
+    val b = 1
+    var max: Int? = a 
+    // if (a < b) {
+    //     max = b
+    // } else {
+    //     max = a
+    // }
+    max = if (a > b) a else b
+    println(max) 
+    max = if (a > b) {
+        println("its a")
+        a
+    } else {
+        println("its b")
+        b
+    }
 }
 
 fun strings() {

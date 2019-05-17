@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
     // unsigned()
     // strings()
     // expressions()
-    // returnAndLabels()
+    returnAndLabels()
 }
 
 fun returnAndLabels() {
